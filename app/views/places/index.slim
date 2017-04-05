@@ -1,0 +1,42 @@
+.container
+  - if flash[:notice] 
+    .notice = flash[:notice]
+  - if flash[:alert] 
+    .alert = flash[:alert]
+
+  h2 Places
+  table.table
+    thead
+      tr
+        th Name
+        th Recomendations
+        th Add recomendation
+    - @places.each do |place|
+      tbody
+        tr
+          td = place.name
+          td = place.recomendations.count  
+          td 
+            button.btn.btn-info.btn-sm data-target="#myModal" data-toggle="modal" type="button" Add recomendation
+          td = link_to "Show place", place_path(place.id), class: "btn btn-info"
+
+        /! Modal
+        #myModal.modal.fade role="dialog" 
+          .modal-dialog
+            /! Modal content
+            .modal-content
+              .modal-header
+                button.close data-dismiss="modal" type="button"  &times;
+                h4.modal-title Add recomendation
+              .modal-body
+                = form_for [place, @recomendation] do |f|
+                  .form-group
+                    = f.label "Recomendation text"
+                    = f.text_area :text, class: "form-control", required: true
+                  .form-group
+                    = f.label "points"
+                    = f.number_field :point, min: 1, max: 5, class: "form-control", required: true
+                  = f.submit "Submit", class: "btn btn-primary" 
+              .modal-footer
+                button.btn.btn-default data-dismiss="modal" type="button"  Close
+

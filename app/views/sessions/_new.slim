@@ -1,0 +1,7 @@
+- if current_user 
+  = current_user.email
+  = link_to 'Logout', logout_path
+- else
+  = link_to 'Twitter', '/auth/twitter'
+br
+br

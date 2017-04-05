@@ -1,0 +1,17 @@
+h1 Place name #{@place.name}
+
+h3 All Recomentadions
+table.table
+  thead
+    tr
+      th Author
+      th Text
+      th Points
+  - @place.recomendations.each do |recomendation|
+    tbody
+      tr
+        td = recomendation.user.email
+        td = recomendation.text
+        td = recomendation.point
+        - if current_user.id == recomendation.user.id
+          td = link_to "Tweet", tweet_place_recomendation_path(@place.id, recomendation.id), { method: :post }
