@@ -16,9 +16,12 @@
         tr
           td = place.name
           td = place.recomendations.count  
-          td 
-            button.btn.btn-info.btn-sm data-target="#myModal" data-toggle="modal" type="button" Add recomendation
-          td = link_to "Show place", place_path(place.id), class: "btn btn-info"
+          - if current_user
+            td 
+              button.btn.btn-info.btn-sm data-target="#myModal" data-toggle="modal" type="button" Add recomendation
+            td = link_to "Show place", place_path(place.id), class: "btn btn-info"
+          - else 
+            td authenticated only
 
         /! Modal
         #myModal.modal.fade role="dialog" 

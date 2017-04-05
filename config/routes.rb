@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :places, only: [:index, :show] do
     resources :recomendations, only: [:create] do
-      post "tweet", on: :member
+      get 'tweet', to: 'recomendations#tweet'
     end
   end
 end
